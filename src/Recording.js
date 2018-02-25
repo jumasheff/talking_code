@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import TextField from 'material-ui/TextField';
 import { ReactMic, saveRecording } from 'react-mic'
 import { Media, Player, controls, utils } from 'react-media-player'
 import { withMediaProps } from 'react-media-player'
+
 
 class Recording extends Component {
   constructor(props){
@@ -34,12 +36,15 @@ class Recording extends Component {
   onStop = (blobObject) => {
     this.setState({
       blobURL : blobObject.blobURL
-    });
-    console.log(blobObject.blobURL);
+    })
   }
 
   onTimeUpdate = (t) => {
-    console.log(t);
+    console.log(t)
+  }
+
+  onTextChange = (e, newValue) => {
+    console.log(newValue)
   }
 
   render() {
@@ -78,10 +83,19 @@ class Recording extends Component {
           }
         </Media>
           <div>
-            <audio ref="audioSource" controls="controls" src={this.state.blobURL}></audio>
+            <audio ref="audioSource" controls="controls" src={this.state.blobURL} />
           </div>
           <button onClick={this.startRecording}>Start</button>
           <button onClick={this.stopRecording}>Stop</button>
+          <div>
+            <TextField
+              hintText="MultiLine with rows: 2 and rowsMax: 4"
+              multiLine={true}
+              rows={2}
+              rowsMax={4}
+              onChange={this.onTextChange}
+            />
+          </div>
       </div>
     )
   }
